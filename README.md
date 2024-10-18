@@ -40,7 +40,7 @@ Make sure you have the following installed:
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/your-username/nike-air-force-1-store.git
+   https://github.com/Matidza/Customs.git
    cd nike-air-force-1-store
    ```
 
