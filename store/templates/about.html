@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
         
         <!-- Header-->
-        <header class="bg-dark py-5" >
+        <header class="bg-dark py-5" style="background-image: url('{% static 'we.webp' %}'); background-size: cover; background-position: center;">
             <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
+                <div class="text-center text-black">
                     <h1 class="display-4 fw-bolder">About Page</h1>
                     <p class="lead fw-normal text-red-50 mb-0">With this shop homepage template</p>
                 </div>

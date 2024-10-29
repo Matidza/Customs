@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+        
+        <!-- Header-->
+        <header class="bg-dark py-5" style="background-image: url('{% static 'we.webp' %}'); background-size: cover; background-position: center;">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-black">
+                    <h1 class="display-4 fw-bolder">All</h1>
+                    <p class="lead fw-normal text-red-50 mb-0"></p>
+                </div>
+            </div>
+        </header> 
+       <br>
+       <p align="center" >
+        {% for al in all %}
+        
+            <h5 class="fw-bolder">{{ al }}</h5>
+            
+        {% endfor %}
+        
+       </p>
+        <br><br><br><br><br> 
+        
+        {% endblock %}
