@@ -7,7 +7,7 @@ class Cart():
         cart = self.session.get('session_key')
 
         # if session key doesnt exist, create one
-        if "session_key" not in request.session:
+        if 'session_key' not in request.session:
             cart = self.session['session_key'] = {}
 
 
