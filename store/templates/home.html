@@ -33,7 +33,7 @@
                                     <div class="card-body p-4">
                                         <div class="text-center">
                                             <!-- Product name-->
-                                            <h5 class="fw-bolder">{{ product.name}}</h5>
+                                            <h5 class="fw- text-secondary text-start">{{ product.name}}</h5>
 
                                             <!-- Product Sale
                                                 <div class="d-flex justify-content-center small text-warning mb-2">
@@ -43,12 +43,12 @@
                                                 </div>-->
                                                 <br>
                                                 <!-- Product price-->
-                                            <b>
+                                            <b class="text-start">
                                                 R {{ product.sale_price}}
                                             </b>
                                             <!-- Product price Strike-->
                                             &nbsp;
-                                            <i style="color: red;">
+                                            <i class="text-start"style="color: red;">
                                                 <strike>
                                                 R {{ product.price}}
                                                 </strike>
@@ -78,12 +78,12 @@
                                 <img class="card-img-top" src="{{ product.image.url}}" alt="..." />
                                 <!-- Product details-->
                                 <div class="card-body p-4">
-                                    <div class="text-center">
+                                    <div class="text-left">
                                         <!-- Product name-->
-                                        <h5 class="fw-bolder">{{ product.name}}</h5>
+                                        <h5 class="fw text-secondary text-start">{{ product.name}}</h5>
                                         <!-- Product price-->
                                         <br>
-                                        <b>
+                                        <b class="text-start">
                                             R {{ product.price}}
                                         </b>
                                     </div>
