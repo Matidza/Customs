@@ -1,3 +1,5 @@
+
+
 class Cart():
 
     def __init__(self, request):
@@ -13,3 +15,19 @@ class Cart():
 
         # make sure cart is available on all pages of site
         self.cart = cart
+
+    
+    def add(self, product):  #, quantity
+        
+        product_id = str(product.id)
+
+        # Logic
+        if product_id in self.cart:
+            pass
+        else:
+            self.cart[product_id] = {'price': str(product.price)}
+            #self.cart[product_id] = int(product_qty)
+
+        self.session.modified = True
+
+		
