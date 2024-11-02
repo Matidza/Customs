@@ -13,9 +13,8 @@ def cart_summary(request):
 
 # Adding items to cart
 def cart_add(request):
-    # Get the cart
+# Get the cart
 	cart = Cart(request)
-      
 	# test for POST
 	if request.POST.get('action') == 'post':
 		# Get stuff
@@ -29,14 +28,13 @@ def cart_add(request):
 		cart.add(product=product)#, quantity=product_qty
 
 		# Get Cart Quantity
-		#cart_quantity = cart.__len__()
+		cart_quantity = cart.__len__()
 
 		# Return resonse
-		response = JsonResponse({'Product Name: ':product.name})
-		#response = JsonResponse({'qty': cart_quantity})
+		# response = JsonResponse({'Product Name: ': product.name})
+		response = JsonResponse({'qty': cart_quantity})
 		messages.success(request, ("Product Added To Cart..."))
-		return response
-    
+		return response    
 
 
 # deleting items from cart
