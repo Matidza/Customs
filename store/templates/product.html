@@ -3,86 +3,109 @@
 {% block content %}
 
 <!-- Section-->            
-    <div class="container px-4 px-lg-5 mt-5">   
-        <div class="card mb-3" >
-            <div class="row g-0">
-
+<div class="container px-4 px-lg-5 mt-5">   
+    <div class="card mb-3 shadow-sm p-3 mb-5 bg-white rounded " >
+          
+        <div class="row g-0">
                 <div class="col-md-4">
                     <img src="{{ product.image.url}}" class="img-fluid rounded-start" alt="...">
                 </div>
 
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h3 class="card-title">{{ product.name}}</h3>
-                        {% if product.is_sale %}
-
-                            <!-- Product Sale
-                        <div class="d-flex justify-content-center small text-warning mb-2">
-                        <div class="bi-star-fill"></div>
-                        &nbsp;&nbsp;Sale!&nbsp;&nbsp;
-                        <div class="bi-star-fill"></div>
-                        </div>-->
-                        <p class="card-text">
-                            The Nike Air Force 1 "Psychedelic" is a vibrant, one-of-a-kind design 
-                            that embodies the free-spirited essence of the psychedelic era.
+                        <h3 class="card-title">
+                            {{ product.name}}
+                        </h3>
+                        <p class="card-text text-secondary">
+                            {{ product.smalldescription }}
                         </p>
-                            <br>
+                        <!-- Product Sale-->
+                        {% if product.is_sale %}
+                            <div class="btn bg-danger text-white position-absolute" style="top: 0.5rem; right: 1rem">
+                                    On Sale!!!
+                            </div>
+
                             <b>R {{ product.sale_price}}</b>
+
                             <!-- Product price Strike-->
                             &nbsp;
-                            <i style="color: red;">
+                            <i >
                                 <strike>
                                 R {{ product.price}} 
                                 </strike>
                             </i>
-                            
-        
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View</a></div>
-                            </div>
-                            
-                            <button type="submit" value="{{ product.id }}" id="add-cart" class="btn btn-secondary">
-                                Add to cart
-                            </button>
+                        <br><br>
 
+                        <b>In stock</b>
+                        promotional stuff
+                       
                         {% else %}
-
-                            <b>R {{ product.price}}</b>
-                            ID: {{ product.id }}
-                            <br>
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View</a></div>
+                        
+                        <b>R {{ product.price}}</b>
+                        
+                        
+                        
+                        <!--
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center">
+                                <a class="btn btn-outline-dark mt-auto" href="#">
+                                    View
+                                </a>
                             </div>
-                            <button type="submit" value="{{ product.id }}" id="add-cart" class="btn btn-secondary">
-                                Add to cart
-                            </button>
+                        </div>-->
 
+                        <b>In stock</b>
+                        promotional stuff
+                        <br><br>
+                       
+                    
                         {% endif %}
-                       
+
+                        <div class="row justify-content">
+                            <div class="col-md-2">Quantity:</div>
+                            
+                                <div class="col-md-6">
+                                    <div class="col-md-3 col-sm-1">
+                                        <select class="form-select form-select-sm" id="qty-cart">
+                                            {% for key, value in quantities.items %}
+                                            {% if key == product.id|slugify %}
+                                                <option selected>{{ value }}</option>
+                                            {% endif %}
+                                            {% endfor %}
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="submit" value="{{ product.id }}" id="add-cart" class="btn col-md-9  " style="background-color: rgb(25, 178, 25); border-color: rgb(25, 178, 25);">
+                            Add to cart
+                        </button>
+                        
                     </div>
                 </div>
-            </div>
-        </div>  
-        <br><br>
+            </div>  
 
+            <br><br>
 
-        <div class="card mb-3" >
-            <div class="row g-0">
-                <div class="col-md-8">
+            <div class="card mb-3 shadow-sm p-3 mb-5 bg-white rounded " >
+                <div class="row g-0">
+                    <div class="col-md-10">
                     <div class="card-body">
-                       
                         <h6 class="card-title"><b>Description</b></h6>
-                        <p class="card-text">
-                            {{ product.description}}
-                        </p>
-                
+                        <p class="card-text">{{ product.description}}</p>
                     </div>
-                </div>
             </div>
-        </div> 
-
-                
-    </div>
+        </div>
+    </div>          
+</div>
 
 
     <script>
@@ -94,10 +117,11 @@
                 type: 'POST',
                 url: '{% url 'cart_add' %}',
                 data: {
-            product_id: $('#add-cart').val(),
-            product_qty: $('#qty-cart option:selected').text(),
-            csrfmiddlewaretoken: '{{ csrf_token }}',
-            action: 'post'
+                product_id: $('#add-cart').val(),
+                product_qty: $('#qty-cart option:selected').text(),
+                product_size:$('#size-cart option:selected').text(),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
                 },
 
                 success: function(json){

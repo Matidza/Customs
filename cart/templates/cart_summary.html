@@ -5,15 +5,149 @@
         
 <!-- Header-->
 <header class="bg-dark py-5" style="background-image: url('{% static 'home.webp' %}'); background-size: cover; background-position: center;">
-    <div class="container px-4 px-lg-5 my-5">
+    <div class="container px-4 px-lg-5 ">
         <div class="text-center text-black">
             <h1 class="display-4 fw-bolder">Shopping Cart</h1>
             <p class="lead fw-normal text-red-50 mb-0">View your cart</p>
         </div>
     </div>
 </header>
+<div class="container">
+
+  <br><br>
+  <div class="card mb-1" >
+            <div class="row g-0">
+                <div class="col-md-8">
+                    <div class="card-body">
+                       
+                        <h6 class="card-title"><b>Product Shipped From CustomKicks Store</b></h6>
+                        <p class="card-text">
+                            {{ product.description}}
+                        </p>
+                
+                    </div>
+                </div>
+            </div>
+        </div> 
+ 
+    {% for product in cart_products %}
+<div class="card mb-1">
+  <div class="row g-0">
+    
+    <div class="col-md-2">
+      <a style="text-decoration: none; color: inherit; outline: none;" href="{% url 'product' product.id%}">
+        <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
+      </a>
+    </div>
+
+    <div class="col-md-8">
+      <div class="card-body">
+          <h5 class="card-title text-">{{ product.name }}</h5>
+          <div class="btn bg-light text-dark position-absolute" style="top: 0.5rem; right: 0.5rem">
+            <h3>R{{ product.sale_price }}</h3>
+          </div>
+          <p class="card-text text-secondary">
+            {{ product.smalldescription }}
+          </p>
+          
+          {% if product.is_sale %}
+          <div class="btn bg-light text-dark position-absolute" style="top: 0.5rem; right: 0.5rem">
+            <h3>R{{ product.sale_price }}</h3>
+          </div>
+
+          <b>In stock</b>
+          promotional stuff
+          <div class="row align-items-left">
+            <!-- Quantity label -->
+            <div class="col-md-1 col-sm-4 text-end">
+              Qty:
+            </div>
+            
+            <!-- Quantity selector -->
+            <div class="col-md-2 col-sm-4">
+              <select class="form-select form-select-sm" id="qty-cart">
+                {% for key, value in quantities.items %}
+                  {% if key == product.id|slugify %}
+                    <option selected>{{ value }}</option>
+                  {% endif %}
+                {% endfor %}
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+
+           
+
+            <!-- Update button -->
+            <div class="col-md-3 col-sm-2">
+              <button type="button" data-index="{{ product.id }}" class="btn btn-light btn-sm update-cart">Save</button>
+            </div>
+
+            <!-- Remove button -->
+            <div class="col-md-3 col-sm-2">
+              <button type="button" data-index="{{ product.id }}" class="btn btn-light btn-sm delete-product">Remove</button>
+            </div>
+            
 
 
+
+          {% else %}
+          <div class="btn bg-light text-dark position-absolute" style="top: 0.5rem; right: 0.5rem">
+            <h3>R{{ product.price }}</h3>
+          </div>
+            
+            <b>In stock</b>
+          promotional stuff
+          <div class="row align-items-left">
+            <!-- Quantity label -->
+            <div class="col-md-1 col-sm-4 text-end">
+              Qty:
+            </div>
+            
+            <!-- Quantity selector -->
+            <div class="col-md-2 col-sm-4">
+              <select class="form-select form-select-sm" id="qty-cart">
+                {% for key, value in quantities.items %}
+                  {% if key == product.id|slugify %}
+                    <option selected>{{ value }}</option>
+                  {% endif %}
+                {% endfor %}
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+
+           
+
+            <!-- Update button -->
+            <div class="col-md-3 col-sm-2">
+              <button type="button" data-index="{{ product.id }}" class="btn btn-light btn-sm update-cart">Save</button>
+            </div>
+
+            <!-- Remove button -->
+            <div class="col-md-3 col-sm-2">
+              <button type="button" data-index="{{ product.id }}" class="btn btn-light btn-sm delete-product">Remove</button>
+            </div>
+          {% endif %}
+          
+          
+          </div>
+         
+       
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+<br><br>
+
+</div>
 
 
 {% endblock %}

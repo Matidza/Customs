@@ -5,69 +5,73 @@
         
 <!-- Header-->
 <header class="bg-dark py-5" style="background-image: url('{% static 'home.webp' %}'); background-size: cover; background-position: center;">
-    <div class="container px-4 px-lg-5 my-5">
+    <div class="container px-4 px-lg-5 ">
         <div class="text-center text-black">
             <h1 class="display-4 fw-bolder">Make Your Mark</h1>
-            <p class="lead fw-normal text-red-50 mb-0">Make a statement with handcrafted, one-of-a-kind footwear</p>
+            <p class="lead fw-normal text-red-50 mb-0">
+                Make a statement with handcrafted, one-of-a-kind footwear
+            </p>
         </div>
     </div>
 </header>
 
 <!-- Section-->
-<section class="py-5"><!---->
+<section class="py-5">
     
-    <div class="container px-4 px-lg-5 mt-5">
+    <div class="container ">
         
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center shadow-sm p-3 mb-5 bg-white rounded border-white">
             
             {% for product in products %}
                 {% if product.is_sale %}
-                    <div class="col mb-5 ">
-                        <div class="card h-100">
+
+                    <div class="col mb-4 ">
+                        <div class="card ">
                             <a style="text-decoration: none; color: inherit; outline: none;" href="{% url 'product' product.id%}">
                                 <!-- On Sale-->
-                                <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-                                    <!-- Product image-->
-                                    <img class="card-img-top" src="{{ product.image.url}}" alt="..." />
-                                    <!-- Product details-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <!-- Product name-->
-                                            <h5 class="fw- text-secondary text-start">{{ product.name}}</h5>
+                                <div class="btn bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                                    Sale
+                                </div>
+                                <!-- Product image-->
+                                <img class="card-img-top" src="{{ product.image.url}}" alt="..." />
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 class="fw- text-secondary text-start" style="width: 300pz; white-space: nowrap;overflow: hidden; text-overflow: ellipsis;">
+                                            {{ product.name}}
+                                        </h5>
 
-                                            <!-- Product Sale
-                                                <div class="d-flex justify-content-center small text-warning mb-2">
-                                                <div class="bi-star-fill"></div>
-                                                &nbsp;&nbsp;Sale!&nbsp;&nbsp;
-                                                <div class="bi-star-fill"></div>
-                                                </div>-->
+                                        <!-- Product Sale
+                                        <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        &nbsp;&nbsp;Sale!&nbsp;&nbsp;
+                                        <div class="bi-star-fill"></div>
+                                        </div>-->
                                                 <br>
                                                 <!-- Product price-->
-                                            <b class="text-start">
-                                                R {{ product.sale_price}}
-                                            </b>
-                                            <!-- Product price Strike-->
-                                            &nbsp;
-                                            <i class="text-start"style="color: red;">
-                                                <strike>
-                                                R {{ product.price}}
-                                                </strike>
-                                            </i>
-                                            
+                                        <b class="text-start">
+                                            R {{ product.sale_price}}
+                                        </b>
+                                        <!-- Product price Strike-->
+                                        &nbsp;
+                                        <i class="text-start">
+                                            <strike>R {{ product.price}}</strike>
+                                        </i> 
                                     </div>
                                 </div>
                             </a>
-                                <!-- Product actions
-                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center">
-                                        <a class="btn btn-outline-dark mt-auto" href="#">
-                                            View
-                                        </a>
-                                    </div>
-                                </div>-->
+
+                            <!-- Product actions
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                    <a class="btn btn-outline-dark mt-auto" href="#">
+                                        View
+                                    </a>
+                                </div>
+                            </div>-->
                             
                         </div>
-                            
                     </div>
                     
                     {% else %}
@@ -80,7 +84,9 @@
                                 <div class="card-body p-4">
                                     <div class="text-left">
                                         <!-- Product name-->
-                                        <h5 class="fw text-secondary text-start">{{ product.name}}</h5>
+                                        <h5 class="fw text-secondary text-start" style="width: 300pz; white-space: nowrap;overflow: hidden; text-overflow: ellipsis;">
+                                            {{ product.name}}
+                                        </h5>
                                         <!-- Product price-->
                                         <br>
                                         <b class="text-start">
@@ -97,11 +103,10 @@
                                         </a>
                                     </div>
                                 </div>-->
-                            </div>
-                            
+                        </div> 
                     </div>
                 {% endif %}
-            {% endfor %}                  
+            {% endfor %}
         </div>
     </div>
 </section>
