@@ -42,7 +42,7 @@ class Cart():
         # get ids from cart
         product_ids = self.cart.keys()
 
-        #use ids to look up products in DB model
+        # use ids to look up products in DB model
         products = Product.objects.filter(id__in=product_ids)
 
         return products
@@ -52,7 +52,57 @@ class Cart():
 
         return quantities
     
+    def update(self, product, quantity):
+        product_id = str(product)
+        product_qty = str(quantity)
+
+        # {}
+        # Get the cart
+        ourcart = self.cart
+        # updxate Dict
+        ourcart[product_id] = product_qty
+
+        self.session.modified = True
+        this = self.cart
+        return this
+    
+
+
+    def delete(self, product):
+        product_id = str(product)
+
+        if product_id in self.cart:
+            del self.cart[product_id]
+        
+        self.session.modified = True
+    
     """def get_size(self):
         size = self.cart
 
-        return size"""
+        return size
+    """
+    def cart_total(self):
+        quantities = self.cart
+        # {"4": 3, "5":1}
+
+        # Get product IDS
+        product_ids = self.cart.keys()
+        # lookup those keys in our products database model
+        products = Product.objects.filter(id__in=product_ids)
+        
+        # Get quantities
+        quantities = self.cart
+        # Start counting at 0
+        total = 0
+        
+        for key, value in quantities.items():
+            # Convert key string into into so we can do math
+            key = int(key)
+            for product in products:
+                if product.id == key:
+                    if product.is_sale:
+                        total = total + (product.sale_price * value)
+                    else:
+                        total = total + (product.price * value)
+
+        return total

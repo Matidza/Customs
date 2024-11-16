@@ -5,7 +5,7 @@
         
 <!-- Header-->
 <header class="bg-dark py-5" style="background-image: url('{% static 'b.webp' %}'); background-size: cover; background-position: center;">
-    <div class="container px-4 px-lg-5 my-5">
+    <div class="container px-4 px-lg-5 ">
         <div class="text-center text-black">
             <h1 class="display-4 fw-bolder">
                 {{ category }} Air Forces
@@ -18,7 +18,7 @@
 <!-- Section-->
 <section class="py-5"><!---->
     
-    <div class="container px-4 px-lg-5 mt-5">
+    <div class="container ">
         
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             
@@ -35,7 +35,9 @@
                                     <div class="card-body p-4">
                                         <div class="text-center">
                                             <!-- Product name-->
-                                            <h5 class="fw-bolder">{{ product.name}}</h5>
+                                            <h5 class="fw- text-secondary text-start" style="width: 300pz; white-space: nowrap;overflow: hidden; text-overflow: ellipsis;">
+                                            {{ product.name}}
+                                        </h5> 
 
                                             <!-- Product Sale
                                                 <div class="d-flex justify-content-center small text-warning mb-2">
@@ -58,10 +60,10 @@
                                             
                                     </div>
                                 </div>
-                                <!-- Product actions-->
+                                <!-- Product actions
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                     <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id %}">View</a></div>
-                                </div>
+                                </div>-->
                             </a>
                         </div>
                             
@@ -77,7 +79,9 @@
                                 <div class="card-body p-4">
                                     <div class="text-center">
                                         <!-- Product name-->
-                                        <h5 class="fw-bolder">{{ product.name}}</h5>
+                                        <h5 class="fw text-secondary text-start" style="width: 300pz; white-space: nowrap;overflow: hidden; text-overflow: ellipsis;">
+                                            {{ product.name}}
+                                        </h5>
                                         <!-- Product price-->
                                         <br>
                                         <b>
@@ -86,10 +90,10 @@
                                     </div>
                                 </div>
                             </a>
-                                <!-- Product actions-->
+                                <!-- Product actions
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                     <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View</a></div>
-                                </div>
+                                </div>-->
                             </div>
                             
                     </div>
