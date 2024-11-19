@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
-from .models import Product, Category
+from .models import Product, Category, Profile
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm
+from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, UserInfoForm
 from django import forms
 from django.http import  HttpResponse
 from django.utils.translation import  gettext as _
@@ -27,18 +27,14 @@ def login_user(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-
         user = authenticate(request, username=username, password=password)
-
         if user is not None:
             login(request, user)
             messages.success(request, ('Login Was Successful!'))
             return redirect('home')
-
         else:
             messages.success(request, ('Login Not Successful! Try Again!!'))
             return redirect('login')
-        
     else:
         return render(request, 'login.html', {})
 
@@ -63,8 +59,8 @@ def register_user(request):
 
             user = authenticate(username=username, password=password)
             login(request, user)
-            messages.success(request, ('Registration Forms Submitted Successfully. '))
-            return redirect('home')
+            messages.success(request, ('Username & Account Created, Fill Out User Info. '))
+            return redirect('update_info')
         
         else:
             messages.success(request, ('Registration Not Successfully. Try Again!!'))
@@ -84,7 +80,6 @@ def update_user(request):
         # Validate  the form and its content and login user
 		if user_form.is_valid():
 			user_form.save()
-
 			login(request, current_user)
 			messages.success(request, "User Has Been Updated!!")
 			return redirect('home')
@@ -115,7 +110,25 @@ def update_password(request):
             return render(request, "update_password.html", {'form':form})#          
     else:
         messages.success(request, "You Must Be Logged In To Access That Page!!")
-        return redirect('home')               
+        return redirect('home')    
+
+# User Info
+def update_info(request):
+    if request.user.is_authenticated:
+        # What/Which user is authenticated/
+        current_user = Profile.objects.get(user__id=request.user.id)
+        # create form
+        form = UserInfoForm(request.POST or None, instance=current_user)
+        # Validate  the form and its content and login user
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your info Has Been Updated!!")
+            return redirect('home')
+        return render(request, "update_info.html", {'form':form})
+    else:
+        messages.success(request, "You Must Be Logged In To Access That Page!!")
+        return redirect('home')
+    #return render(request, "update_info.html", {})
     
 """
 def register_user(request):
@@ -140,10 +153,8 @@ def register_user(request):
 
 # Individual product page
 def product(request, pk):
-
     # Query the DB table to get product id for each selected product
     product = Product.objects.get(id=pk)
-
     # pass the product to the product.html file to be viewed/shown
     return render(request, 'product.html', {'product':product} )
 
@@ -152,7 +163,6 @@ def product(request, pk):
 def category(request, cat):
     cat = cat.replace('-', ' ')
     # filter the Category Model by product category
-    
     try:
         category = Category.objects.get(name=cat)
         products = Product.objects.filter(category=category)
@@ -162,8 +172,11 @@ def category(request, cat):
         messages.success(request, ("Category Doesn't Exist!"))
         return redirect('home')
 
+
+'''
 #test
 def all(request):
     all = Category.objects.all()
 
     return render(request, 'all.html', {'all': all})
+'''
