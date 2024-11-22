@@ -108,3 +108,76 @@ class UpdateInfoForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ["phone", 'address1', 'address2', 'city', "city", "province", "zipcode", "country",]
+
+
+
+
+
+
+
+
+
+
+
+
+# Search Funtionaluty
+# Urls.py
+path('search', views.search, name='search')
+
+# search.html
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Header-->
+    <header class="bg-dark py-5" style="background-image: url('{% static 'we.webp' %}'); background-size: cover; background-position: center;">
+        <div class="container px-4 px-lg-5 ">
+            <div class="text-center text-black">
+                <h1 class="display-4 fw-bolder">Search</h1>
+                <p class="lead fw-normal text-red-50 mb-0">Find What You're Looking For...</p>
+            </div>
+        </div>
+    </header> 
+
+    <section class="py-5">
+        <div class="container">
+            <form method="POST" action="{% url 'search' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Search For Products" name="searched">
+            </div>
+            <button type="submit" class="btn btn-secondary">
+                Search Products
+            </button>
+        </form>
+        {% if searched %}
+
+
+
+
+        </div>
+    </section>
+
+{% endblock %}
+
+
+# Add search t nav bar
+# vews.py
+from djnago.db.models import Q
+from .models import Product
+
+def search(request):
+    # Determine if user filled the form
+    if request.method == 'POST':
+        searched = request.POST['searched']
+
+        # query Product DB model for produuct
+        searched = Product.objects.filter(Q(name__icontains=searched) | Q(description__icontains=searched))
+        # Test for Nul
+        if not searched:
+            messages.success()
+            return render(request, 'search.html', {})
+        else:
+            return render(request, 'search.html', {'serached': searched})
+    else:
+        return render(request, 'search.html', {})

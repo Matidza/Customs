@@ -1,10 +1,11 @@
-from store.models import Product
+from store.models import Product, Profile
 
 class Cart():
 
     def __init__(self, request):
         self.session = request.session
-
+        # Get request
+        self.request = request
         # Get the current session key if it exists
         cart = self.session.get('session_key')
 
@@ -15,10 +16,31 @@ class Cart():
 
         # make sure cart is available on all pages of site
         self.cart = cart
+    def db_add(self, product, quantity):
+        product_id = str(product)
+        product_qty = str(quantity)
+        #product_size = str(size)
+        # Logic
+        if product_id in self.cart:
+            pass
+        else:
+            #self.cart[product_id] = {'price': str(product.price)}
+            self.cart[product_id] = int(product_qty)
+            #self.cart[product_id] = int(product_size)
 
+        self.session.modified = True
+        # del with loggedin User
+        if self.request.user.is_authenticated:
+            # Get current user profile
+            current_user = Profile.objects.filter(user__id=self.request.user.id)
+            # Convert  {'3':1, '5':2} to {"3": 1, "5":2}
+            carty = str(self.cart)
+            carty = carty.replace("\'", "\"")
+
+            # lets save carty to Model
+            current_user.update(old_cart=str(carty))
     
-    def add(self, product, quantity):  
-        
+    def add(self, product, quantity):   
         product_id = str(product.id)
         product_qty = str(quantity)
         #product_size = str(size)
@@ -31,7 +53,16 @@ class Cart():
             #self.cart[product_id] = int(product_size)
 
         self.session.modified = True
+        # del with loggedin User
+        if self.request.user.is_authenticated:
+            # Get current user profile
+            current_user = Profile.objects.filter(user__id=self.request.user.id)
+            # Convert  {'3':1, '5':2} to {"3": 1, "5":2}
+            carty = str(self.cart)
+            carty = carty.replace("\'", "\"")
 
+            # lets save carty to Model
+            current_user.update(old_cart=str(carty))
 
     def __len__(self):
         return len(self.cart)
@@ -64,6 +95,16 @@ class Cart():
 
         self.session.modified = True
         this = self.cart
+        
+        if self.request.user.is_authenticated:
+            # Get current user profile
+            current_user = Profile.objects.filter(user__id=self.request.user.id)
+            # Convert  {'3':1, '5':2} to {"3": 1, "5":2}
+            carty = str(self.cart)
+            carty = carty.replace("\'", "\"")
+
+            # lets save carty to Model
+            current_user.update(old_cart=str(carty))
         return this
     
 
@@ -75,6 +116,15 @@ class Cart():
             del self.cart[product_id]
         
         self.session.modified = True
+        if self.request.user.is_authenticated:
+            # Get current user profile
+            current_user = Profile.objects.filter(user__id=self.request.user.id)
+            # Convert  {'3':1, '5':2} to {"3": 1, "5":2}
+            carty = str(self.cart)
+            carty = carty.replace("\'", "\"")
+
+            # lets save carty to Model
+            current_user.update(old_cart=str(carty))
     
     """def get_size(self):
         size = self.cart

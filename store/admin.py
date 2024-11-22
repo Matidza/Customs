@@ -18,7 +18,7 @@ class ProfileInline(admin.StackedInline):
 class UserAdmin(admin.ModelAdmin):
     model = User 
     field = ['username', 'first_name', 'last_name', 'email']
-    inline = [ProfileInline]
+    inlines = [ProfileInline]
 
 # Unregister the old way
 admin.site.unregister(User)

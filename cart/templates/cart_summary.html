@@ -15,8 +15,11 @@
         <br/>
         <div class="container">
 
-          <br><br>
-  <div class="card mb-1" >
+  
+
+        {% if cart_products %}
+        	{% for product in cart_products %}
+          <div class="card mb-1" >
             <div class="row g-0">
                 <div class="col-md-8">
                     <div class="card-body">
@@ -27,23 +30,20 @@
                 </div>
             </div>
         </div>
-
-        {% if cart_products %}
-        	{% for product in cart_products %}
         	
 <div class="card mb-1">
   <div class="row g-0">
     <div class="col-md-2">
-      <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
+       <a style="text-decoration: none; color: inherit; outline: none;" href="{% url 'product' product.id%}">
+        <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
+      </a>
+      
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        
-          <h6 class="card-title text-">{{ product.name }}</h6>
-        
-        
+          <h5 class="card-title text-">{{ product.name }}</h5>
         <p class="card-text text-secondary">
-            {{ product.smalldescription }}
+            {{ product.small_description }}
         </p>
         
         <!--Products on sales will be here-->
@@ -90,14 +90,15 @@
                   </select>
                 </div>
             </div>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           
             
-        <a href="{% url 'home'%}" class="btn btn-secondary btn-sm">Home</a>
+        
+            <center>
+              <a href="{% url 'home'%}" class="btn btn-secondary btn-sm">Home</a>
         <button type="button" data-index="{{ product.id }}" class="btn btn-warning btn-sm update-cart">Update</button>
         <button type="button" data-index="{{ product.id }}" class="btn btn-danger btn-sm delete-product" >Remove</button>
+            </center>
+        
         
     
       </div>
@@ -114,7 +115,17 @@
             </div>
             <br/>
         	{% else %}
-          <h6 class="card-title text-">There's Nothing In Your Cart...</h6>
+          <br><br> 
+          <center>    
+                 <div class="card shadow-sm p-3  bg-white rounded" >
+
+                  <h4 class="card-title text-">
+              Your cart is empty... Let's go grab something from the store.
+            </h4> 
+                 </div>                             
+                                  
+          </center>
+          
         	
         	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         {% endif %}
@@ -179,10 +190,6 @@ $(document).on('click', '.delete-product', function(e){
     });
 
 })
-
-
-
-
 </script>
 
 {% endblock %}

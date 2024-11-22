@@ -8,8 +8,9 @@ from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, UserInfoForm
 from django import forms
 from django.http import  HttpResponse
 from django.utils.translation import  gettext as _
-
-
+from django.db.models import Q
+import json
+from cart.cart import Cart
 # home page Route/View
 def home(request):
     output = _("TEST")
@@ -24,12 +25,28 @@ def about(request):
 
 # Login
 def login_user(request):
+    # Determine if user filled the form
     if request.method == 'POST':
+        # Inputs linked to to the login.html form 
+        # <input type="text" class="form-control" name="username" placeholder="Username"> 
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+
+            # Do some shopping cart stuff 
+            # Get the current user
+            current_user = Profile.objects.get(user__id=request.user.id)
+            # get thier save cart in the DB model
+            saved_cart = current_user.old_cart 
+            # convert db str to python dict
+            if saved_cart:
+                # convert
+                converted_cart = json.loads(saved_cart)
+                cart = Cart(request)
+                for key, value in converted_cart.items():
+                    cart.db_add(product=key, quantity=value)
             messages.success(request, ('Login Was Successful!'))
             return redirect('home')
         else:
@@ -82,7 +99,7 @@ def update_user(request):
 			user_form.save()
 			login(request, current_user)
 			messages.success(request, "User Has Been Updated!!")
-			return redirect('home')
+			return redirect('update_info')
 		return render(request, "update_user.html", {'user_form':user_form})
 	else:
 		messages.success(request, "You Must Be Logged In To Access That Page!!")
@@ -180,3 +197,20 @@ def all(request):
 
     return render(request, 'all.html', {'all': all})
 '''
+
+# Search for products
+def search(request):
+    # Determine if the user filled the form
+    if request.method == 'POST':
+        searched = request.POST['searched']
+        # Lets query the products DB Model
+        searched = Product.objects.filter(Q(name__icontains=searched) | Q(description__icontains=searched))
+
+        # Test for Null searches
+        if not searched:
+            messages.success(request, ("Searched Item Doesn't Not Exist"))
+            return render(request, 'search.html')
+        else:
+            return render(request, 'search.html', {'searched':searched})
+    else:
+        return render(request, 'search.html')
