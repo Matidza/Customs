@@ -1,5 +1,5 @@
 from django.shortcuts import render
 
 # Create your views here.
-def payments(request):
-    return render(request, 'payments.html', {})
+def payment_success(request):
+    return render(request, 'payment/payment_success.html', {})
