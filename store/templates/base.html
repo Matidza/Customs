@@ -90,6 +90,7 @@
                                 </ul>
                             </li>
                             
+                            
                             {% if user.is_superuser %}
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" 
@@ -107,6 +108,9 @@
                             </li>
                             
                             {% endif %}
+                            <div class="sm">
+                                <input type="text" class="form-control " id="filter-search" placeholder="search school..." onkeyup="filterProvinces()">
+                            </div>
                             
                             
                             <!-- Order Items for the customer-->
