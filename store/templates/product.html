@@ -1,0 +1,248 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5 mb-3 shadow-sm p-3 mb-5 bg-white rounded">
+            <div class="row gx-4 gx-lg-5 align-items-center"> 
+
+                <div class="col-md-6">
+                    <!-- Product Image Display -->
+                    <div class="image-container text-center">
+                        <img id="product-image" class="card-img-top mb-3" 
+                            src="{{ product.image.url }}" alt="{{ product.name }}" />
+                    </div>
+                    <!-- Navigation Buttons Below the Image -->
+                    <div class="text-center mt-2">
+                        <button id="prev-btn" class="btn btn-outline-dark">
+                            &lt; <!-- "<" Symbol -->
+                        </button>
+                        <button id="next-btn" class="btn btn-outline-dark">
+                            &gt; <!-- ">" Symbol -->
+                        </button>
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-6">
+                    <div class="small mb-1">SKU: BST-498</div>
+                    <h1 class="display-5 fw-bolder">{{ product.name}}</h1>
+                        
+                    {% if product.is_sale %}
+                    <div class="fs-5 mb-5">
+                        <span>R {{ product.price}}</span>
+                        <span class="text-decoration-line-through">R {{ product.sale_price}} </span>
+                    </div>
+                    {% else %}
+                        <div class="fs-5 mb-5">
+                        <span>R {{ product.price}}</span>
+                    </div>
+                    {% endif %}
+
+                    <p class="lead">{{ product.small_description }}</p>
+                    <!-- <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />-->
+                    <br>
+                    <div class="row justify-content">
+                        <div class="col-md-2">Qty:</div>
+                            <div class="col-md-9">
+                                <div class="col-md-3 col-sm-1">
+                                    <select class="form-select form-select-sm" id="qty-cart">
+                                        {% for key, value in quantities.items %}
+                                        {% if key == product.id|slugify %}
+                                            <option selected>{{ value }}</option>
+                                        {% endif %}
+                                        {% endfor %}
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                            </div>  
+                        </div>
+                        <br>
+                            <button class="btn btn-outline-dark flex-shrink-0" type="submit"value="{{ product.id }}" id="add-cart">
+                                <i class="bi-cart-fill me-1"></i>
+                                Add to cart
+                            </button>
+                    </div>
+                </div>
+                <br><br>
+                <div class="card mb-3 shadow-sm p-3 mb-5 bg-white rounded">
+                    <div class="row g-0">
+                        <div class="col-md-10">
+                            <div class="card-body">
+                                <h6 class="card-title"><b>Description</b></h6>
+                                <p class="card-text" id="description" style="margin: 0; font-size: 14px; color: #333;">
+                                    {{ product.description }}
+                                </p>
+                                <a href="#" id="see-more" 
+                                style="color: blue; cursor: pointer; text-decoration: underline;" 
+                                onclick="toggleDescription(event)">See more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>               
+        </div>            
+    </section>
+        <!-- Related items section-->
+        <section class="py-5 bg-light">
+            <div class="container px-4 px-lg-5 mt-5">
+                <h2 class="fw-bolder mb-4">Related products</h2>
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+                    {% for product in products %}
+                    {% if product.is_sale %}
+                            <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            <a style="text-decoration: none; color: inherit; outline: none;" href="{% url 'product' product.id%}">
+                            <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+
+                            <!-- Product image-->
+                            <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{ product.name }}</h5>
+                                    <!-- Sale -->
+                                    <!-- Product price-->
+                                    R{{ product.sale_price }}
+                                    &nbsp;
+                                    <strike>
+                                        R{{ product.price }}
+                                    </strike>
+                                </div>
+                            </div>
+                            </a>
+                            <!-- Product actions
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                    <a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id  %}">View Product</a>
+                                </div>
+                            </div>-->
+                        </div>       
+                    </div>
+                    {% else %}
+                <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <a style="text-decoration: none; color: inherit; outline: none;" href="{% url 'product' product.id%}">
+                            <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">
+                                        {{ product.name }}
+                                    </h5>
+                                    <!-- Product price-->
+                                    R{{ product.price }}
+                                </div>
+                            </div>
+                        </a>
+                            <!-- Product actions
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                    <a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id %}">View Product</a>
+                                </div>
+                            </div>-->
+
+                        </div>
+                    </div>
+                     {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    <script>
+
+        // Check if button pressed
+        $(document).on('click', '#add-cart', function(e){
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '{% url 'cart_add' %}',
+                data: {
+                product_id: $('#add-cart').val(),
+                product_qty: $('#qty-cart option:selected').text(),
+                product_size:$('#size-cart option:selected').text(),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
+                },
+                success: function(json){
+                    console.log(json)
+                    document.getElementById("cart_quantity").textContent = json.qty
+                    location.reload();
+                },
+                error: function(xhr, errmsg, err){
+                }
+            });
+        })
+        </script>
+        <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const descriptionElement = document.getElementById("description");
+        const originalText = descriptionElement.textContent.trim();
+        const maxLength = 100; // Number of characters to show initially
+
+        if (originalText.length > maxLength) {
+            const truncatedText = originalText.substring(0, maxLength) + "...";
+            descriptionElement.textContent = truncatedText;
+            document.getElementById("see-more").style.display = "inline"; // Show "See more" link
+        } else {
+            document.getElementById("see-more").style.display = "none"; // Hide "See more" link if not needed
+        }
+        // Function to toggle between full and truncated text
+        window.toggleDescription = function (event) {
+            event.preventDefault(); // Prevent scrolling to the top
+            if (descriptionElement.textContent.endsWith("...")) {
+                descriptionElement.textContent = originalText; // Show full text
+                document.getElementById("see-more").textContent = "See less";
+            } else {
+                descriptionElement.textContent = originalText.substring(0, maxLength) + "..."; // Truncate text again
+                document.getElementById("see-more").textContent = "See more";
+            }
+        };
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Array of product images
+        const images = [
+            "{% if product.image %}{{ product.image.url }}{% endif %}",
+            "{% if product.image1 %}{{ product.image1.url }}{% endif %}",
+            "{% if product.image3 %}{{ product.image3.url }}{% endif %}",
+            "{% if product.image4 %}{{ product.image4.url }}{% endif %}",
+            "{% if product.image5 %}{{ product.image5.url }}{% endif %}",
+            "{% if product.image6 %}{{ product.image6.url }}{% endif %}",
+            "{% if product.image7 %}{{ product.image7.url }}{% endif %}",
+            "{% if product.image8 %}{{ product.image8.url }}{% endif %}",
+        ].filter(Boolean); // Remove empty or undefined URLs
+
+        let currentIndex = 0; // Track the current image index
+        const imageElement = document.getElementById("product-image");
+
+        // Function to show an image based on index
+        function showImage(index) {
+            imageElement.src = images[index];
+        }
+
+        // Previous Button
+        document.getElementById("prev-btn").addEventListener("click", function () {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            showImage(currentIndex);
+        });
+
+        // Next Button
+        document.getElementById("next-btn").addEventListener("click", function () {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage(currentIndex);
+        });
+    });
+</script>
+
+{% endblock %}

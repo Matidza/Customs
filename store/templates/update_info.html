@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- Header-->
+    <header class="bg-dark py-5" ><!--style="background-image: url('{% static 'b.webp' %}'); background-size: cover; background-position: center;"-->
+        <div class="container px-4 px-lg-5 ">
+            <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Update Profile Info</h1>
+                    <p class="lead fw-normal text-red-50 mb-0">Update Your Profile Info</p>
+            </div>
+        </div>
+    </header> 
+    <br>
+    <div class="  container  " >
+       <div class="row">
+            <div class="col-md-6 offset-md-3 px-4 px-lg-5 my-5 mb-3 shadow-sm p-3 mb-5 bg-white rounded"> 
+                <strong>Billing Infomation</strong>
+                <br><br>
+                <form method="POST" action="{% url 'update_info' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <br/><br>
+                    <strong>Shipping Infomation</strong>
+                    <br><br>
+                   {{ shipping_form.as_p }} 
+
+                    <button type="submit" class="btn btn-secondary">
+                        Update Profile
+                    </button> 
+                    &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
+                    &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
+                    &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  
+                </form>
+            </div>	
+        </div>
+    </div>
+    <br/><br/>
+{% endblock %}
