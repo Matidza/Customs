@@ -8,7 +8,7 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load Dotenv
-load_dotenv()
+#load_dotenv()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -17,11 +17,12 @@ SECRET_KEY = 'django-insecure-8%g&cru09l5k89!v&+%s99o9o_3_m=dl^9enu@rmztn2'
 #SECRET_KEY =os.environ.get['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-#ALLOWED_HOSTS = []  
+ALLOWED_HOSTS = []  
 
 # Production
-#ALLOWED_HOSTS = ['https://customs.up.railway.app/','customkicks.onrender.com', 'https://customkicks.onrender.com', 'localhost', 'http://0.0.0.0:8080', '0.0.0.0:8080']
-#CSRF_TRUSTED_ORIGINS = ['https://customs.up.railway.app/','https://customkicks.onrender.com', 'https://customkicks.onrender.com', 'https://localhost', 'http://0.0.0.0:8080', '0.0.0.0:8080']
+ALLOWED_HOSTS = ['https://customkicks.up.railway.app/','customkicks.onrender.com', 'https://customkicks.onrender.com', 'localhost']
+CSRF_TRUSTED_ORIGINS = ['customkicks.up.railway.app/','https://customkicks.onrender.com', 'https://customkicks.onrender.com', 'https://localhost']
+
 
 # Application definition
 
