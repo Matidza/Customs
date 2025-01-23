@@ -7,7 +7,7 @@ import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Load Dotenv
+
 load_dotenv()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -17,7 +17,7 @@ SECRET_KEY = 'django-insecure-8%g&cru09l5k89!v&+%s99o9o_3_m=dl^9enu@rmztn2'
 #SECRET_KEY =os.environ.get['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+#ALLOWED_HOSTS = []  
 
 # Production
 ALLOWED_HOSTS = [
@@ -86,7 +86,6 @@ WSGI_APPLICATION = 'Customs.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-''' '''
 DATABASES = {
     'default': {
         # Development
@@ -110,15 +109,10 @@ DATABASES = {
 #}
 
 # Railway.app
-'''  '''
+
 DATABASES = {
-<<<<<<< HEAD
-    'default': dj_database_url.parse(os.environ.get('POSTGRES_CONNECTION_STRING'), conn_max_age=600)
-}'''
-=======
     'default': dj_database_url.parse(os.environ['POSTGRES_CONNECTION_STRING'], conn_max_age=600)
 }
->>>>>>> 87fc61a4e649521f9321aeca02ff9d8a198c6187
 
 
 
