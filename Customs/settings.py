@@ -20,8 +20,8 @@ DEBUG = True
 #ALLOWED_HOSTS = []  
 
 # Production
-ALLOWED_HOSTS = ['https://customs.up.railway.app/','customkicks.onrender.com', 'https://customkicks.onrender.com', 'localhost']
-CSRF_TRUSTED_ORIGINS = ['https://customs.up.railway.app/','https://customkicks.onrender.com', 'customkicks.onrender.com', 'https://localhost']
+ALLOWED_HOSTS = ['https://customs.up.railway.app/','https://customkicks.onrender.com', 'https://customkicks.onrender.com', 'localhost']
+CSRF_TRUSTED_ORIGINS = ['https://customs.up.railway.app/','https://customkicks.onrender.com', 'https://customkicks.onrender.com', 'https://localhost']
 
 
 # Application definition
