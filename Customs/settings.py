@@ -21,7 +21,7 @@ SECRET_KEY = 'django-insecure-8%g&cru09l5k89!v&+%s99o9o_3_m=dl^9enu@rmztn2'
 
 # Production
 ALLOWED_HOSTS = ['https://customs.up.railway.app/','customkicks.onrender.com', 'https://customkicks.onrender.com', 'localhost']
-CSRF_TRUSTED_ORIGINS = ['customs.up.railway.app/','https://customkicks.onrender.com', 'https://customkicks.onrender.com', 'https://localhost']
+CSRF_TRUSTED_ORIGINS = ['https://customs.up.railway.app/','https://customkicks.onrender.com', 'https://customkicks.onrender.com', 'https://localhost']
 
 
 # Application definition
