@@ -23,14 +23,16 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'customs.up.railway.app',
     'customkicks.onrender.com',
-    'localhost'
+    'localhost',
+    '0.0.0.0:8080'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://customs.up.railway.app',
     'https://customkicks.onrender.com',
     'http://localhost',
-    'https://localhost'
+    'https://localhost',
+    'http://0.0.0.0:8080'
 ]
 
 # Application definition
