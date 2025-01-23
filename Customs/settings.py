@@ -81,8 +81,8 @@ WSGI_APPLICATION = 'Customs.wsgi.application'
 DATABASES = {
     'default': {
         # Development
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
 
         # Production
         # Aivien
@@ -101,10 +101,10 @@ DATABASES = {
 #}
 
 # Railway.app
-'''  
+'''  '''
 DATABASES = {
     'default': dj_database_url.parse(os.environ['POSTGRES_CONNECTION_STRING'], conn_max_age=600)
-}'''
+}
 
 
 
