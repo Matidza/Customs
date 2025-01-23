@@ -17,7 +17,7 @@ SECRET_KEY = 'django-insecure-8%g&cru09l5k89!v&+%s99o9o_3_m=dl^9enu@rmztn2'
 #SECRET_KEY =os.environ.get['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = []  
+#ALLOWED_HOSTS = []  
 
 # Production
 ALLOWED_HOSTS = ['https://customkicks.up.railway.app/','customkicks.onrender.com', 'https://customkicks.onrender.com', 'localhost']
