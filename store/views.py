@@ -20,14 +20,9 @@ from django.contrib.auth.decorators import login_required
 
 # home page Route/View
 def home(request):
-    output = _("TEST")
-    products = Product.objects.all()
-    #products = Product.objects.order_by('?')
-    products = Product.objects.all()
-    #products = Product.objects.order_by('?')
-    
-
-    return render(request, 'home.html', {'products':products})
+    products = Product.objects.all().order_by("?")
+    #product = Product.objects.order_by('?')
+    return render(request, 'home.html', {'products':products, 'product':product})
 
 
 # About bage
@@ -207,7 +202,7 @@ def category(request, cat):
     try:
         category = Category.objects.get(name=cat)
         products = Product.objects.filter(category=category)
-        return render(request, 'home.html', {'products':products, 'category':category})
+        return render(request, 'category.html', {'products':products, 'category':category})
         #return render(request, 'category.html', {'product':product, 'category':category})
     except:
         messages.success(request, ("Category Doesn't Exist!"))

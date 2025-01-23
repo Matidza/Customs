@@ -2,9 +2,9 @@
 {% load static %}
 {% block content %} 
 <!-- Header-->
-<header class="bg-dark py-5" style="background-image: url('{% static 'home.webp' %}'); background-size: cover; background-position: center;">
+<header class="bg-dark py-5" style="background-image: url('{% static 'home.webp' %}'); background-size: cover; background-position: center; height: 300px;">
     <div class="container px-4 px-lg-5 ">
-        <div class="text-center text-black">
+        <div class="text-center text-dark">
             <h1 class="display-4 fw-bolder">Make Your Mark</h1>
             <p class="lead fw-normal text-red-50 mb-0">
                 Make a statement with handcrafted, one-of-a-kind footwear
@@ -19,17 +19,17 @@
     <div class="row">
 
         <!-- Sidebar Section -->
-        <div class="col-md-2 d-none d-md-block" style="margin-top: 30px;">
+        <div class="col-md-2 d-none d-md-block" style="margin-top: 7%;max-height: 210px;">
             <div class="card border-0 shadow-sm h-100 sticky-sidebar">
                 <!-- Sidebar Header -->
                 <div class="card-header bg-secondary text-white fw-bold fs-5 text-center">
                     Filter by:
                 </div>
-                <div class="sm">
+                <!--<div class="sm">
                     <input type="text" class="form-control " id="filter-search" placeholder="search school..." onkeyup="filterProvinces()">
                 </div>
 
-                <!-- Dropdown for Filters -->
+                 Dropdown for Filters -->
                 <div class="p-2">
                     <div class="dropdown">
                         <button class="btn btn-outline-clear dropdown-toggle w-70" type="button" id="provinceDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -45,7 +45,7 @@
 
                 <!-- Dropdown for Filters -->
                 <div class="p-2">
-                    <div class="dropdown">
+                    <div class="dropdown center">
                         <button class="btn btn-outline-clear dropdown-toggle w-70" type="button" id="provinceDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             Select Model
                         </button>
@@ -58,41 +58,57 @@
                 </div>
             </div>
         </div>
-
+       
+        
         <!-- Main Content Section -->
         <div class="col-md-9">
             <main class="flex-shrink-0">
-
-                <section class="py-5">
                     <div class="container px-4 px-lg-5 mt-5">
+                        
+                         <center>
+                            <h2 class="display-4 fw-bolder">Best Seller</h2>
+                            <p class="lead fw-normal text-red-50 mb-0">
+                                Shop from the latest Trends
+                            </p>
+                         </center>
+                            
+                        
+                        
+                        <br><br>
+                        
                         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"> 
                             
                             {% if products %}
 
-                                        {% for product in products %}
-                                        {% if product.is_sale %}
+                                {% for product in products %}
+                                    {% if product.best_seller %}
+                                    
+                                    {% if product.is_sale %}
+
                                         <div class="col mb-5">
                                             <div class="card h-100">
                                                 <!-- Sale badge-->
                                                 <a style="text-decoration: none; color: inherit; outline: none;" href="{% url 'product' product.id%}">
-                                                <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-
-                                                <!-- Product image-->
-                                                <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
-                                                <!-- Product details-->
-                                                <div class="card-body p-4">
-                                                    <div class="text-center">
-                                                        <!-- Product name-->
-                                                        <h5 class="fw-bolder">{{ product.name }}</h5>
-                                                        <!-- Sale -->
-                                                        <!-- Product price-->
-                                                        R{{ product.sale_price }}
-                                                        &nbsp;
-                                                        <strike>
-                                                        R{{ product.price }}
-                                                        </strike>
+                                                    <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                                                        Sale
                                                     </div>
-                                                </div>
+
+                                                    <!-- Product image-->
+                                                    <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
+                                                    <!-- Product details-->
+                                                    <div class="card-body p-4">
+                                                        <div class="text-center">
+                                                            <!-- Product name-->
+                                                            <h5 class="fw-bolder">{{ product.name }}</h5>
+                                                            <!-- Sale -->
+                                                            <!-- Product price-->
+                                                            R{{ product.sale_price }}
+                                                            &nbsp;
+                                                            <strike>
+                                                            R{{ product.price }}
+                                                            </strike>
+                                                        </div>
+                                                    </div>
                                                 </a>
                                                 <!-- Product actions
                                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
@@ -103,7 +119,66 @@
                                             </div>       
                                         </div>
                                         {% else %}
-                                    <div class="col mb-5">
+                                        <div class="col mb-5">
+                                            <div class="card h-100">
+                                                <!-- Product image-->
+                                                <a style="text-decoration: none; color: inherit; outline: none;" href="{% url 'product' product.id%}">
+                                                    <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
+                                                    <!-- Product details-->
+                                                    <div class="card-body p-4">
+                                                        <div class="text-center">
+                                                            <!-- Product name-->
+                                                            <h5 class="fw-bolder">{{ product.name }}</h5>
+                                                            <!-- Product price-->
+                                                        
+                                                            R{{ product.price }}
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+
+                                    {% else %}
+
+                                {% for product in products %}
+                                    {% if product.best_seller %}
+                                    {% if product.is_sale %}
+                                        <div class="col mb-5">
+                                            <div class="card h-100">
+                                                <!-- Sale badge-->
+                                                <a style="text-decoration: none; color: inherit; outline: none;" href="{% url 'product' product.id%}">
+                                                    <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+
+                                                    <!-- Product image-->
+                                                    <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
+                                                    <!-- Product details-->
+                                                    <div class="card-body p-4">
+                                                        <div class="text-center">
+                                                            <!-- Product name-->
+                                                            <h5 class="fw-bolder">{{ product.name }}</h5>
+                                                            <!-- Sale -->
+                                                            <!-- Product price-->
+                                                            R{{ product.sale_price }}
+                                                            &nbsp;
+                                                            <strike>
+                                                            R{{ product.price }}
+                                                            </strike>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <!-- Product actions
+                                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                                    <div class="text-center">
+                                                        <a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id  %}">View Product</a>
+                                                    </div>
+                                                </div>-->
+                                            </div>       
+                                        </div>
+                                        {% else %}
+                                        <div class="col mb-5">
                                             <div class="card h-100">
                                                 <!-- Product image-->
                                                 <a style="text-decoration: none; color: inherit; outline: none;" href="{% url 'product' product.id%}">
@@ -118,75 +193,100 @@
                                                         R{{ product.price }}
                                                     </div>
                                                 </div>
-                                            </a>
-                                            </div>
-                                        </div>
-                                            {% endif %}
-                                        {% endfor %}
-
-                            {% else %}
-
-                                             {% for product in products %}
-                                        {% if product.is_sale %}
-                                        <div class="col mb-5">
-                                            <div class="card h-100">
-                                                <!-- Sale badge-->
-                                                <a style="text-decoration: none; color: inherit; outline: none;" href="{% url 'product' product.id%}">
-                                                <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
-
-                                                <!-- Product image-->
-                                                <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
-                                                <!-- Product details-->
-                                                <div class="card-body p-4">
-                                                    <div class="text-center">
-                                                        <!-- Product name-->
-                                                        <h5 class="fw-bolder">{{ product.name }}</h5>
-                                                        <!-- Sale -->
-                                                        <!-- Product price-->
-                                                        R{{ product.sale_price }}
-                                                        &nbsp;
-                                                        <strike>
-                                                        R{{ product.price }}
-                                                        </strike>
-                                                    </div>
-                                                </div>
                                                 </a>
-                                                <!-- Product actions
-                                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                                    <div class="text-center">
-                                                        <a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id  %}">View Product</a>
-                                                    </div>
-                                                </div>-->
-                                            </div>       
-                                        </div>
-                                        {% else %}
-                                    <div class="col mb-5">
-                                            <div class="card h-100">
-                                                <!-- Product image-->
-                                                <a style="text-decoration: none; color: inherit; outline: none;" href="{% url 'product' product.id%}">
-                                                <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
-                                                <!-- Product details-->
-                                                <div class="card-body p-4">
-                                                    <div class="text-center">
-                                                        <!-- Product name-->
-                                                        <h5 class="fw-bolder">{{ product.name }}</h5>
-                                                        <!-- Product price-->
-                                                    
-                                                        R{{ product.price }}
-                                                    </div>
-                                                </div>
-                                            </a>
                                             </div>
                                         </div>
-                                            {% endif %}
-                                        {% endfor %}
+                                    {% endif %}
+                                    {% endif %}
+                                {% endfor %}
 
                             {% endif %}
-                            
-                       
-                    </div>
-                </section>
+                        </div>
+                        <br><br>
+                        <!-- 
+                        <section class="shoppify-section-banner">
+                            <div class="container">
+                                <div class="product-collection">
+                                <div class="left-content collection-item">
+                                    <div class="products-thumb">
+                                    <img src="{% static 'nike.webp' %}" alt="collection item" class="medium-image image-rounded">
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 product-entry">
+                                    <div class="categories">Denim collection</div>
+                                    <h3 class="item-title">The casual selection.</h3>
+                                    <p>Vel non viverra ligula odio ornare turpis mauris. Odio aliquam, tincidunt ut vitae elit risus. Tempor egestas condimentum et ac rutrum dui, odio.</p>
+                                    <div class="btn-wrap">
+                                        <a href="shop.html" class="d-flex align-items-center">shop collection <i class="icon icon-arrow-io"></i>
+                                        </a>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>        
+                            </div>
+                            </section>-->
 
+                        <center>
+                            <h1 class="display-4 fw-bolder">All Shopping</h1>
+                            <p class="lead fw-normal text-red-50 mb-0">
+                                Shop from the latest Trends
+                            </p>
+                         </center>
+                        <br><br><br>
+
+                        
+                        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"> 
+    {% if products %}
+        <!-- Loop through only the first 8 products -->
+        {% for product in products|slice:":8" %}
+            {% if product.is_sale %}
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge -->
+                        <a style="text-decoration: none; color: inherit; outline: none;" href="{% url 'product' product.id %}">
+                            <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image -->
+                            <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
+                            <!-- Product details -->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">{{ product.name }}</h5>
+                                    R{{ product.sale_price }}
+                                    &nbsp;
+                                    <strike>R{{ product.price }}</strike>
+                                </div>
+                            </div>
+                        </a>
+                    </div>       
+                </div>
+            {% else %}
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Product image -->
+                        <a style="text-decoration: none; color: inherit; outline: none;" href="{% url 'product' product.id %}">
+                            <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
+                            <!-- Product details -->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">{{ product.name }}</h5>
+                                    R{{ product.price }}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <!-- View More Button -->
+        <div class="text-center mt-4">
+            <a class="btn btn-primary" href="">View More</a>
+        </div>
+    {% else %}
+        <p>No products available.</p>
+    {% endif %}
+</div>
+
+                    </div>
             </main>
         </div>
 

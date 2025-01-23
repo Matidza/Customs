@@ -17,12 +17,11 @@ SECRET_KEY = 'django-insecure-8%g&cru09l5k89!v&+%s99o9o_3_m=dl^9enu@rmztn2'
 #SECRET_KEY =os.environ.get['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = []  
+#ALLOWED_HOSTS = []  
 
 # Production
-#ALLOWED_HOSTS = ['https://customkicks.up.railway.app/','customkicks.onrender.com', 'https://customkicks.onrender.com', 'localhost']
-#CSRF_TRUSTED_ORIGINS = ['customkicks.up.railway.app/','https://customkicks.onrender.com', 'https://customkicks.onrender.com', 'https://localhost']
-
+#ALLOWED_HOSTS = ['https://customs.up.railway.app/','customkicks.onrender.com', 'https://customkicks.onrender.com', 'localhost', 'http://0.0.0.0:8080', '0.0.0.0:8080']
+#CSRF_TRUSTED_ORIGINS = ['https://customs.up.railway.app/','https://customkicks.onrender.com', 'https://customkicks.onrender.com', 'https://localhost', 'http://0.0.0.0:8080', '0.0.0.0:8080']
 
 # Application definition
 
@@ -81,17 +80,17 @@ WSGI_APPLICATION = 'Customs.wsgi.application'
 DATABASES = {
     'default': {
         # Development
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
 
         # Production
         # Aivien
-        # 'ENGINE': 'django.db.backends.postgresql',
-        # 'NAME': 'defaultdb',
-        # 'USER': 'avnadmin',
-        # 'PASSWORD': os.environ.get('what'),
-        # 'HOST': 'customkicks-matidza46-4129.e.aivencloud.com',
-        # 'PORT': '12695',
+        #'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': 'defaultdb',
+        #'USER': 'avnadmin',
+        #'PASSWORD': os.environ.get('what'),
+        #'HOST': 'customkicks-matidza46-4129.e.aivencloud.com',
+        #'PORT': '12695',
     }
 }
 
@@ -101,10 +100,10 @@ DATABASES = {
 #}
 
 # Railway.app
-'''  
+'''  '''
 DATABASES = {
     'default': dj_database_url.parse(os.environ['POSTGRES_CONNECTION_STRING'], conn_max_age=600)
-}'''
+}
 
 
 
