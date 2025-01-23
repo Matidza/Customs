@@ -20,10 +20,16 @@ from django.contrib.auth.decorators import login_required
 
 # home page Route/View
 def home(request):
+<<<<<<< HEAD
     products = Product.objects.all()
     #product = Product.objects.order_by('?')
     return render(request, 'index.html', {'products':products, 'product':product})
 
+=======
+    products = Product.objects.all().order_by("?")
+    #product = Product.objects.order_by('?')
+    return render(request, 'home.html', {'products':products, 'product':product})
+>>>>>>> 87fc61a4e649521f9321aeca02ff9d8a198c6187
 
 def shop(request):
     products = Product.objects.all().order_by("?")

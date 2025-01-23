@@ -17,12 +17,25 @@ SECRET_KEY = 'django-insecure-8%g&cru09l5k89!v&+%s99o9o_3_m=dl^9enu@rmztn2'
 #SECRET_KEY =os.environ.get['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+<<<<<<< HEAD
 ALLOWED_HOSTS = ['*']  
+=======
+#ALLOWED_HOSTS = []  
+>>>>>>> 87fc61a4e649521f9321aeca02ff9d8a198c6187
 
 # Production
-#ALLOWED_HOSTS = ['https://customkicks.up.railway.app/','customkicks.onrender.com', 'https://customkicks.onrender.com', 'localhost']
-#CSRF_TRUSTED_ORIGINS = ['customkicks.up.railway.app/','https://customkicks.onrender.com', 'https://customkicks.onrender.com', 'https://localhost']
+ALLOWED_HOSTS = [
+    'customs.up.railway.app',
+    'customkicks.onrender.com',
+    'localhost'
+]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://customs.up.railway.app',
+    'https://customkicks.onrender.com',
+    'http://localhost',
+    'https://localhost'
+]
 
 # Application definition
 
@@ -81,8 +94,8 @@ WSGI_APPLICATION = 'Customs.wsgi.application'
 DATABASES = {
     'default': {
         # Development
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
 
         # Production
         # Aivien
@@ -101,10 +114,15 @@ DATABASES = {
 #}
 
 # Railway.app
-'''  
+'''  '''
 DATABASES = {
+<<<<<<< HEAD
     'default': dj_database_url.parse(os.environ.get('POSTGRES_CONNECTION_STRING'), conn_max_age=600)
 }'''
+=======
+    'default': dj_database_url.parse(os.environ['POSTGRES_CONNECTION_STRING'], conn_max_age=600)
+}
+>>>>>>> 87fc61a4e649521f9321aeca02ff9d8a198c6187
 
 
 
