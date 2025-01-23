@@ -1,42 +1,52 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<!-- Header--> 
-    <header class="bg-dark py-5" style="background-image: url('{% static 'nike.webp' %}'); background-size: cover; background-position: center;" >
-        <div class="container px-4 px-lg-5">
-            <div class="text-center text-black">
-                <h1 class="display-4 fw-bolder">Login</h1>
-                <p class="lead fw-normal text-red-50 mb-0">Login to your Account</p>
+    <!--================login_part Area =================-->
+    <section class="login_part padding_top">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="login_part_text text-center">
+                        <div class="login_part_text_iner">
+                            <h2>New to our Shop?</h2>
+                            <p>There are advances being made in science and technology
+                                everyday, and a good example of this is the</p>
+                            <a href="{% url 'register' %}" class="btn_3">Create an Account</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="login_part_form">
+                        <div class="login_part_form_iner">
+                            <h3>Welcome Back ! <br>
+                                Please Sign in now</h3>
+                            <form class="row contact_form"method="POST" action="{% url 'login' %}" novalidate="novalidate">
+                                {% csrf_token %}
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control" id="name" name="username" value=""
+                                        placeholder="Username">
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="password" class="form-control" id="password" name="password" value=""
+                                        placeholder="Password">
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <div class="creat_account d-flex align-items-center">
+                                        <input type="checkbox" id="f-option" name="selector">
+                                        <label for="f-option">Remember me</label>
+                                    </div>
+                                    <button type="submit" value="submit" class="btn_3">
+                                        log in
+                                    </button>
+                                    <a class="lost_pass" href="#">forget password?</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </header> 
-        <br><br>   
-    <div class="container  " >    
-        <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6 offset-md-3 px-4 px-lg-5 my-5 mb-3 shadow-sm p-3 mb-5 bg-white rounded">
-                <form method="POST" action="{% url 'login' %}">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        
-                        <input type="text" class="form-control" name="username" placeholder="Username"> 
-                    </div>
-                    <br><br>
-                    <div class="form-group">            
-                        <input type="password" class="form-control" name="password" placeholder="Password">
-                    </div>
-                    <br/>
-                    <button type="submit" class="btn btn-secondary">Login</button>
-                     &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
-                    &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
-                    &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;
-                    
-                </form>
-                <br>
-                <center>
-                    Don't have an account? <a href="{% url 'register' %}">Create Account!</a>
-                </center>          
-            </div>	
-        </div>
-    </div>
-    <br><br><br><br><br><br><br><br><br>    
+    </section>
+    <br><br><br><br><br>
+    <!--================login_part end =================-->
 {% endblock %}

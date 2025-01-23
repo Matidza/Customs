@@ -1,36 +1,42 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <!-- Header-->
-    <header class="bg-dark py-5" ><!--style="background-image: url('{% static 'b.webp' %}'); background-size: cover; background-position: center;"-->
-        <div class="container px-4 px-lg-5 ">
-            <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Update Login Details</h1>
-                    <p class="lead fw-normal text-red-50 mb-0">Update Your User Account</p>
+
+
+        <section class="login_part padding_top">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6">
+                    <div class="login_part_text text-center">
+                        <div class="login_part_text_iner">
+                            <h2>New to our Shop?</h2>
+                            <p>There are advances being made in science and technology
+                                everyday, and a good example of this is the</p>
+                            <a href="{% url 'update_password' %}" class="btn_3">Update Password!</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="login_part_form">
+                        <div class="login_part_form_iner">
+                            <h3>Well Things Happen!<br>
+                                Update Password</h3>
+                            <form method="POST" action="{% url 'update_user' %}">
+                                {% csrf_token %}
+                                {{ user_form.as_p }}
+                                <br/>
+
+                                <button type="submit" class="btn btn-secondary">
+                                    Update
+                                </button> 
+ 
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </header> 
-    <br>
-    <div class="  container " >
-       <div class="row">
-            <div class="col-md-6 offset-md-3 px-4 px-lg-5 my-5 mb-3 shadow-sm p-3 mb-5 bg-white rounded"> 
-                <br/>
-                <form method="POST" action="{% url 'update_user' %}">
-                    {% csrf_token %}
-                    {{ user_form.as_p }}
-                    <br/>
-
-                    <button type="submit" class="btn btn-secondary">
-                        Update login Details
-                    </button> 
-                    &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
-                    &nbsp;  &nbsp;  &nbsp;  &nbsp;  
-                    &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;&nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
-                    <a href="{% url 'update_password' %}">Update Password?</a>
-                </form>
-            </div>	
-        </div>
-    </div>
-    <br/><br/><br><br><br><br><br><br>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>   
+    </section>
+    <br><br><br><br><br>
+  
 {% endblock %}

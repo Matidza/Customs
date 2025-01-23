@@ -1,0 +1,402 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %} 
+
+<section class="cat_product_area section_padding">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-9">
+
+                    <div class="row align-items-center latest_product_inner">
+    {% if products %}
+    <!-- Loop through only the first 8 products -->
+    {% for product in products|slice:":8" %}
+        {% if product.is_sale %}
+            <div class="col-lg-4 col-sm-6">
+                <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                <div class="single_product_item">
+                    <img src="{{ product.image.url }}" alt="">
+                    <div class="single_product_text">
+                        <h4>{{ product.name }}</h4>
+                        <h3>R{{ product.sale_price }}</h3>
+                        &nbsp;
+                        <strike>R{{ product.price }}</strike>
+                        <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            
+                                    
+                                    
+
+            {% else %}
+            <div class="col-lg-4 col-sm-6">
+                <div class="single_product_item">
+                    <img src="img/product/product_1.png" alt="">
+                    <div class="single_product_text">
+                        <h4>Quartz Belt Watch</h4>
+                        <h3>$150.00</h3>
+                        <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            {% endif %}
+        {% endfor %}
+
+        <!-- View More Button -->
+        <div class="text-center mt-4">
+            <a class="btn btn-primary" href="">View More</a>
+        </div>
+    {% else %}
+        <p>No products available.</p>
+    {% endif %}
+    <div class="col-lg-4 col-sm-6">
+        <div class="single_product_item">
+            <img src="img/product/product_2.png" alt="">
+            <div class="single_product_text">
+                <h4>Quartz Belt Watch</h4>
+                <h3>$150.00</h3>
+                <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-6">
+        <div class="single_product_item">
+            <img src="img/product/product_3.png" alt="">
+            <div class="single_product_text">
+                <h4>Quartz Belt Watch</h4>
+                <h3>$150.00</h3>
+                <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-6">
+        <div class="single_product_item">
+            <img src="img/product/product_4.png" alt="">
+            <div class="single_product_text">
+                <h4>Quartz Belt Watch</h4>
+                <h3>$150.00</h3>
+                <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-6">
+        <div class="single_product_item">
+            <img src="img/product/product_5.png" alt="">
+            <div class="single_product_text">
+                <h4>Quartz Belt Watch</h4>
+                <h3>$150.00</h3>
+                <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-6">
+        <div class="single_product_item">
+            <img src="img/product/product_6.png" alt="">
+            <div class="single_product_text">
+                <h4>Quartz Belt Watch</h4>
+                <h3>$150.00</h3>
+                <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-6">
+        <div class="single_product_item">
+            <img src="img/product/product_7.png" alt="">
+            <div class="single_product_text">
+                <h4>Quartz Belt Watch</h4>
+                <h3>$150.00</h3>
+                <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-6">
+        <div class="single_product_item">
+            <img src="img/product/product_8.png" alt="">
+            <div class="single_product_text">
+                <h4>Quartz Belt Watch</h4>
+                <h3>$150.00</h3>
+                <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-sm-6">
+        <div class="single_product_item">
+            <img src="img/product/product_2.png" alt="">
+            <div class="single_product_text">
+                <h4>Quartz Belt Watch</h4>
+                <h3>$150.00</h3>
+                <a href="#" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="pageination">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <i class="ti-angle-double-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item"><a class="page-link" href="#">6</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <i class="ti-angle-double-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+        
+
+<section class="" style="top: -500px;">
+    <div class="container-fluid" > 
+        <!-- Main Content Section -->
+       
+            <main class="flex-shrink-0" >
+                    <div class="container px-4 px-lg-5 mt-5" >
+                        
+                         <center>
+                            <h2 class="display-4 fw-bolder">Best Seller</h2>
+                            <p class="lead fw-normal text-red-50 mb-0">
+                                Shop from the latest Trends
+                            </p>
+                         </center>
+                            
+                        
+                        
+                        <br><br>
+                        
+                        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"> 
+                            
+                            {% if products %}
+
+                                {% for product in products %}
+                                    {% if product.best_seller %}
+                                    
+                                    {% if product.is_sale %}
+
+                                        <div class="col mb-5">
+                                            <div class="card h-100">
+                                                <!-- Sale badge-->
+                                                <a style="text-decoration: none; color: inherit; outline: none;" href="{% url 'product' product.id%}">
+                                                    <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+                                                        Sale
+                                                    </div>
+
+                                                    <!-- Product image-->
+                                                    <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
+                                                    <!-- Product details-->
+                                                    <div class="card-body p-4">
+                                                        <div class="text-center">
+                                                            <!-- Product name-->
+                                                            <h5 class="fw-bolder">{{ product.name }}</h5>
+                                                            <!-- Sale -->
+                                                            <!-- Product price-->
+                                                            R{{ product.sale_price }}
+                                                            &nbsp;
+                                                            <strike>
+                                                            R{{ product.price }}
+                                                            </strike>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <!-- Product actions
+                                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                                    <div class="text-center">
+                                                        <a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id  %}">View Product</a>
+                                                    </div>
+                                                </div>-->
+                                            </div>       
+                                        </div>
+                                        {% else %}
+                                        <div class="col mb-5">
+                                            <div class="card h-100">
+                                                <!-- Product image-->
+                                                <a style="text-decoration: none; color: inherit; outline: none;" href="{% url 'product' product.id%}">
+                                                    <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
+                                                    <!-- Product details-->
+                                                    <div class="card-body p-4">
+                                                        <div class="text-center">
+                                                            <!-- Product name-->
+                                                            <h5 class="fw-bolder">{{ product.name }}</h5>
+                                                            <!-- Product price-->
+                                                        
+                                                            R{{ product.price }}
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+
+                                    {% else %}
+
+                                {% for product in products %}
+                                    {% if product.best_seller %}
+                                    {% if product.is_sale %}
+                                        <div class="col mb-5">
+                                            <div class="card h-100">
+                                                <!-- Sale badge-->
+                                                <a style="text-decoration: none; color: inherit; outline: none;" href="{% url 'product' product.id%}">
+                                                    <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+
+                                                    <!-- Product image-->
+                                                    <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
+                                                    <!-- Product details-->
+                                                    <div class="card-body p-4">
+                                                        <div class="text-center">
+                                                            <!-- Product name-->
+                                                            <h5 class="fw-bolder">{{ product.name }}</h5>
+                                                            <!-- Sale -->
+                                                            <!-- Product price-->
+                                                            R{{ product.sale_price }}
+                                                            &nbsp;
+                                                            <strike>
+                                                            R{{ product.price }}
+                                                            </strike>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <!-- Product actions
+                                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                                    <div class="text-center">
+                                                        <a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id  %}">View Product</a>
+                                                    </div>
+                                                </div>-->
+                                            </div>       
+                                        </div>
+                                        {% else %}
+                                        <div class="col mb-5">
+                                            <div class="card h-100">
+                                                <!-- Product image-->
+                                                <a style="text-decoration: none; color: inherit; outline: none;" href="{% url 'product' product.id%}">
+                                                <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
+                                                <!-- Product details-->
+                                                <div class="card-body p-4">
+                                                    <div class="text-center">
+                                                        <!-- Product name-->
+                                                        <h5 class="fw-bolder">{{ product.name }}</h5>
+                                                        <!-- Product price-->
+                                                    
+                                                        R{{ product.price }}
+                                                    </div>
+                                                </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+
+                            {% endif %}
+                        </div>
+                        <br><br>
+
+
+                        <center>
+                            <h1 class="display-4 fw-bolder">All Shopping</h1>
+                            <p class="lead fw-normal text-red-50 mb-0">
+                                Shop from the latest Trends
+                            </p>
+                         </center>
+                        <br><br><br>
+
+                        
+                        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"> 
+    {% if products %}
+        <!-- Loop through only the first 8 products -->
+        {% for product in products|slice:":8" %}
+            {% if product.is_sale %}
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge -->
+                        <a style="text-decoration: none; color: inherit; outline: none;" href="{% url 'product' product.id %}">
+                            <div class="badge bg-danger text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                            <!-- Product image -->
+                            <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
+                            <!-- Product details -->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">{{ product.name }}</h5>
+                                    R{{ product.sale_price }}
+                                    &nbsp;
+                                    <strike>R{{ product.price }}</strike>
+                                </div>
+                            </div>
+                        </a>
+                    </div>       
+                </div>
+            {% else %}
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Product image -->
+                        <a style="text-decoration: none; color: inherit; outline: none;" href="{% url 'product' product.id %}">
+                            <img class="card-img-top" src="{{ product.image.url }}" alt="..." />
+                            <!-- Product details -->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <h5 class="fw-bolder">{{ product.name }}</h5>
+                                    R{{ product.price }}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <!-- View More Button -->
+        <div class="text-center mt-4">
+            <a class="btn btn-primary" href="">View More</a>
+        </div>
+    {% else %}
+        <p>No products available.</p>
+    {% endif %}
+</div>
+
+                    </div>
+            </main>
+    
+
+   
+</div>
+</section>
+
+
+        <script>
+            function filterProvinces() {
+                const input = document.getElementById("filter-search");
+                const filter = input.value.toLowerCase();
+                const items = document.getElementsByClassName("filter-item");
+
+                for (let i = 0; i < items.length; i++) {
+                    const text = items[i].innerText || items[i].textContent;
+                    items[i].style.display = text.toLowerCase().includes(filter) ? "" : "none";
+                }
+            }
+        </script>
+  
+         
+{% endblock %}
