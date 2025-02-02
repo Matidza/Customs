@@ -1,16 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Checkout</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Review Your Order...</p>
-                </div>
-            </div>
-        </header>
-        <br/>
+
+      <br><br><br><br><br><br><br/><br/><br/><br/><br/><br/>
+
         <div class="container">
             <div class="row">
                 
@@ -43,7 +36,7 @@
             {% endfor %}
             Total:  R{{ totals }}
             <br/><br/>
-            <a href="{% url 'cart_summary' %}" class="btn btn-sm btn-outline-secondary">Update Items</a>
+            <a href="{% url 'cart_summary' %}" class="btn_3 btn_info">Update Items</a>
           </div>
         </div>
 <br/><br/>
@@ -63,7 +56,7 @@
 </div>
 <br/>
 
-<button type="submit" class="btn btn-secondary">
+<button type="submit" class="btn btn-success">
         Continue To Billing
 </button>
 

@@ -2,17 +2,29 @@
 {% load static %}
 {% block content %}
 
-     
-        <!-- Header-->
-          <header class="bg-dark py-5" style="background-image: url('{% static 'home.webp' %}'); background-size: cover; background-position: center;">
-              <div class="container px-4 px-lg-5 ">
-                  <div class="text-center text-black">
-                      <h1 class="display-4 fw-bolder">Shopping Cart</h1>
-                      <p class="lead fw-normal text-red-50 mb-0">View your cart</p>
-                  </div>
-              </div>
-          </header>
-        <br/>
+
+  <link rel="stylesheet" href="{% static 'new/css/bootstrap.min.css' %}">
+  <!-- animate CSS -->
+  <link rel="stylesheet" href="{% static 'new/css/animate.css' %}">
+  <!-- owl carousel CSS -->
+  <link rel="stylesheet" href="{% static 'new/css/owl.carousel.min.css' %}">
+  <!-- nice select CSS -->
+  <link rel="stylesheet" href="{% static 'new/css/nice-select.css' %}">
+  <!-- font awesome CSS -->
+  <link rel="stylesheet" href="{% static 'new/css/all.css' %}">
+  <!-- flaticon CSS -->
+  <link rel="stylesheet" href="{% static 'new/css/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static 'new/css/themify-icons.css' %}">
+  <!-- font awesome CSS -->
+  <link rel="stylesheet" href="{% static 'new/css/magnific-popup.css' %}">
+  <!-- swiper CSS -->
+  <link rel="stylesheet" href="{% static 'new/css/slick.css' %}">
+  <link rel="stylesheet" href="{% static 'new/css/price_rangs.css' %}">
+  <!-- style CSS -->
+  <link rel="stylesheet" href="{% static 'new/css/style.css' %}">
+
+         <br><br><br><br><br> <br><br><br><br><br>
+
         <div class="container">
 
         {% if cart_products %}
@@ -40,25 +52,22 @@
     <div class="col-md-8">
       <div class="card-body">
           <h5 class="card-title text-">{{ product.name }}</h5>
-        <p class="card-text text-secondary">
-            {{ product.small_description }}
-        </p>
+        
         
         <!--Products on sales will be here-->
         {% if product.is_sale %}
-          <div class="btn bg-light text-dark position-absolute" style="top: 0.5rem; right: 0.5rem">
-            <h4>R{{ product.sale_price }}</h4>
+          <div class="btn bg-light text-dark " >
+            <h4>R {{ product.sale_price }} &nbsp;&nbsp;&nbsp;&nbsp; <b>On Sale!!!</b> &nbsp; In stock
+          </div></h4>
           </div>
-          <div class="btn bg-light text-dark position-absolute" style="top: 5.5rem; right: 0.5rem">
-           <b>In stock</b>
-            On Sale!!!
-          </div>
+          <div class="btn bg-light text-dark " >
+           
           
         {% else %}
-            <div class="btn bg-light text-dark position-absolute" style="top: 0.5rem; right: 0.5rem">
-            <h4>R{{ product.price }}</h4>
+            <div class="btn bg-light text-dark " >
+            <h3>R {{ product.price }}</h3>
           </div>
-          <div class="btn bg-light text-dark position-absolute" style="top:  5.5rem; right: 0.5rem">
+          <div class="btn bg-light text-dark" >
            <b>In stock</b>
           
           </div>      
@@ -81,11 +90,11 @@
                   </select>
                 </div>
             </div>
-        <center>
-              
-        <button type="button" data-index="{{ product.id }}" class="btn btn-warning btn-sm update-cart">Update</button>
-        <button type="button" data-index="{{ product.id }}" class="btn btn-danger btn-sm delete-product" >Remove</button>
-        </center>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        
+        <button type="button" data-index="{{ product.id }}" class="btn_1 checkout_btn_1 update-cart">Update</button>
+        <button type="button" data-index="{{ product.id }}" class="btn_1 checkout_btn_1 btn-sm delete-product" >Remove</button>
+       
         
       </div>
     </div>
@@ -104,66 +113,98 @@
                  <div class="card shadow-sm p-3  bg-white rounded" >
 
                   <h4 class="card-title text-">
-              Your cart is empty... Let's go grab something from the store.
-            </h4> 
+                    Your cart is empty... Let's go grab something from the store.
+                  </h4> 
+                  <!----> 
+                  <center>
+                    <a href="{% url 'shop' %}" class="btn_2">Shop Now!!!</a>
+                  </center> 
                  </div>                             
                                   
           </center>
         	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         {% endif %}
-    	</div>
+    	  </div>
+        
  
-      <script>
-// Update Cart
-$(document).on('click', '.update-cart', function(e){
-    e.preventDefault();
-    // grab the product id
-    var productid = $(this).data('index');
+      <!-- Load jQuery library before the script that uses it -->
+<script src="{% static 'new/js/jquery-1.12.1.min.js' %}"></script>
 
-    $.ajax({
-    type: 'POST',
-    url: '{% url 'cart_update' %}',
-    data: {
-      product_id: $(this).data('index'),
-      product_qty: $('#select' + productid + ' option:selected').text(),
-      csrfmiddlewaretoken: '{{ csrf_token }}',
-      action: 'post'
-    },
-    success: function(json){
-        console.log(json)
-        document.getElementById("cart_quantity").textContent = json.qty
-        location.reload();
-    },
+<!-- Now you can use jQuery in your script -->
+<script>
+    // Update Cart
+    $(document).on('click', '.update-cart', function(e){
+        e.preventDefault();
+        // grab the product id
+        var productid = $(this).data('index');
+        $.ajax({
+            type: 'POST',
+            url: '{% url 'cart_update' %}',
+            data: { 
+                product_id: $(this).data('index'), 
+                product_qty: $('#select' + productid + ' option:selected').text(), 
+                csrfmiddlewaretoken: '{{ csrf_token }}', 
+                action: 'post' 
+            },
+            success: function(json){
+                console.log(json)
+                document.getElementById("cart_quantity").textContent = json.qty
+                location.reload();
+            },
+            error: function(xhr, errmsg, err){
+            }
+        });
+    })
 
-    error: function(xhr, errmsg, err){
-
-    }
-    });
-})
-
-// Delete Item From Cart
-$(document).on('click', '.delete-product', function(e){
-    e.preventDefault();
-    // grab the product id
-    //var productid = $(this).data('index');
-    $.ajax({
-    type: 'POST',
-    url: '{% url 'cart_delete' %}',
-    data: {
-      product_id: $(this).data('index'),
-      csrfmiddlewaretoken: '{{ csrf_token }}',
-      action: 'post'
-    },
-    success: function(json){
-        console.log(json)
-        document.getElementById("cart_quantity").textContent = json.qty
-        location.reload();
-    },
-
-    error: function(xhr, errmsg, err){
-    }
-    });
-
-})
+    // Delete Item From Cart
+    $(document).on('click', '.delete-product', function(e){
+        e.preventDefault();
+        // grab the product id
+        //var productid = $(this).data('index');
+        $.ajax({
+            type: 'POST',
+            url: '{% url 'cart_delete' %}',
+            data: { 
+                product_id: $(this).data('index'), 
+                csrfmiddlewaretoken: '{{ csrf_token }}', 
+                action: 'post' 
+            },
+            success: function(json){
+                console.log(json)
+                document.getElementById("cart_quantity").textContent = json.qty
+                location.reload();
+            },
+            error: function(xhr, errmsg, err){
+            }
+        });
+    })
 </script>
-{% endblock %}
+
+<!-- Now you can load other scripts that use jQuery -->
+<!-- popper js -->
+<script src="{% static 'new/js/popper.min.js' %}"></script>
+<!-- bootstrap js -->
+<script src="{% static 'new/js/bootstrap.min.js' %}"></script>
+<!-- easing js -->
+<script src="{% static 'new/js/jquery.magnific-popup.js' %}"></script>
+<!-- swiper js -->
+<script src="{% static 'new/js/swiper.min.js' %}"></script>
+<!-- swiper js -->
+<script src="{% static 'new/js/masonry.pkgd.js' %}"></script>
+<!-- particles js -->
+<script src="{% static 'new/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'new/js/jquery.nice-select.min.js' %}"></script>
+<!-- slick js -->
+<script src="{% static 'new/js/slick.min.js' %}"></script>
+<script src="{% static 'new/js/jquery.counterup.min.js' %}"></script>
+<script src="{% static 'new/js/waypoints.min.js' %}"></script>
+<script src="{% static 'new/js/contact.js' %}"></script>
+<script src="{% static 'new/js/jquery.ajaxchimp.min.js' %}"></script>
+<script src="{% static 'new/js/jquery.form.js' %}"></script>
+<script src="{% static 'new/js/jquery.validate.min.js' %}"></script>
+<script src="{% static 'new/js/mail-script.js' %}"></script>
+<script src="{% static 'new/js/stellar.js' %}"></script>
+<script src="{% static 'new/js/price_rangs.js' %}"></script>
+<!-- custom js -->
+<script src="{% static 'new/js/custom.js' %}"></script>
+{% endblock %}  

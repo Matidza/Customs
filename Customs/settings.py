@@ -23,16 +23,14 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'customs.up.railway.app',
     'customkicks.onrender.com',
-    'localhost',
-    '0.0.0.0:8080'
+    'localhost'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://customs.up.railway.app',
     'https://customkicks.onrender.com',
     'http://localhost',
-    'https://localhost',
-    'http://0.0.0.0:8080'
+    'https://localhost'
 ]
 
 # Application definition
@@ -104,17 +102,18 @@ DATABASES = {
         #'PORT': '12695',
     }
 }
-
+  
 # Aiven.io
-#DATABASES = {
- ## 'default': dj_database_url.parse(os.environ.get('Aiven'), conn_max_age=600)
-#}
-
+DATABASES = {
+  'default': dj_database_url.parse(os.environ['Aiven'], conn_max_age=600)
+}
+'''
 # Railway.app
+
 
 DATABASES = {
     'default': dj_database_url.parse(os.environ['POSTGRES_CONNECTION_STRING'], conn_max_age=600)
-}
+}'''
 
 
 

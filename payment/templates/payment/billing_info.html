@@ -1,17 +1,8 @@
 {% extends 'base.html' %} 
 {% load static %} 
 {% block content %} 
-  <!-- Header--> 
-  <header class="bg-dark py-5"> 
-    <div class="container px-4 px-lg-5 my-5"> 
-      <div class="text-center text-white"> 
-        <h1 class="display-4 fw-bolder">Payment Info</h1> 
-        <p class="lead fw-normal text-white-50 mb-0">Enter Your Payment Info...</p> 
-      </div> 
-    </div> 
-  </header> 
 
-  <br/><br/> 
+  <br/><br/><br/><br/> <br/><br/><br/><br/><br/><br/>
 
   <div class="container"> 
     <div class="row"> 
@@ -34,7 +25,7 @@
             Province: {{ shipping_info.shipping_province}}<br> 
             Zipcode: {{ shipping_info.shipping_zipcode}}<br> 
             Country: {{ shipping_info.shipping_country}} <br><br> 
-            <a href="{% url 'checkout' %}" class="btn btn-sm btn-outline-secondary"> Change </a> 
+            <a href="{% url 'checkout' %}" class="btn btn_3 btn-outline-info"> Change </a> 
           </div> 
         </div> 
 
@@ -49,7 +40,9 @@
             <form method="POST"action="{% url 'process_order' %}">
               {% csrf_token %}
               {{ billing_form.as_p }} 
-              <button  type="submit" class="btn btn-success"> Pay Now! </button> 
+
+              <!--  
+              <button  type="submit" class="btn btn-success"> Pay Now! </button> -->
             </form> 
             
           </div> 
@@ -89,7 +82,7 @@
               <br/><br/> 
             {% endfor %} 
             Total: R{{ totals }} <br/><br/> 
-            <a href="{% url 'cart_summary' %}" class="btn btn-sm btn-outline-secondary">Change Items</a> 
+            <a href="{% url 'cart_summary' %}" class="btn btn_3 btn-outline-info">Change Items</a> 
           </div> 
         </div> 
         <!-- Side widget-->
