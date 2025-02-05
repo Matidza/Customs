@@ -101,7 +101,7 @@ def register_user(request):
 
 
 # update User Account
-
+@login_required(login_url='/login')
 def update_user(request):
 	if request.user.is_authenticated:
         # What/Which user is authenticated/
@@ -145,7 +145,7 @@ def update_password(request):
         return redirect('home')    
 
 # User Info
-
+@login_required(login_url='/login')
 def update_info(request):
 	if request.user.is_authenticated:
 		# Get Current User

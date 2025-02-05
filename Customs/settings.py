@@ -17,7 +17,7 @@ SECRET_KEY = 'django-insecure-8%g&cru09l5k89!v&+%s99o9o_3_m=dl^9enu@rmztn2'
 #SECRET_KEY =os.environ.get['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-#ALLOWED_HOSTS = []  
+#ALLOWED_HOSTS =[]
 
 # Production
 ALLOWED_HOSTS = [
@@ -32,8 +32,10 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost',
     'https://localhost'
 ]
-
+ 
+''' '''
 # Application definition
+SITE_ID = 1
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -47,6 +49,8 @@ INSTALLED_APPS = [
     'payment',
     'whitenoise.runserver_nostatic',
     'paypal.standard.ipn',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 
 ]
 
@@ -107,9 +111,9 @@ DATABASES = {
 DATABASES = {
   'default': dj_database_url.parse(os.environ['Aiven'], conn_max_age=600)
 }
-'''
-# Railway.app
 
+# Railway.app
+'''
 
 DATABASES = {
     'default': dj_database_url.parse(os.environ['POSTGRES_CONNECTION_STRING'], conn_max_age=600)

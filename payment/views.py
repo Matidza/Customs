@@ -13,17 +13,21 @@ from django.urls import reverse
 from paypal.standard.forms import PayPalPaymentsForm
 from django.conf import settings
 import uuid # unique user id for duplictate orders
+from django.contrib.auth.decorators import login_required
+
 
 #
-
+@login_required(login_url='/login')
 def payment_success(request):
 	return render(request, "payment/payment_success.html", {})
 
+
+@login_required(login_url='/login')
 def payment_failed(request):
 	return render(request, "payment/payment_failed.html", {})
 
 
-
+@login_required(login_url='/login')
 def checkout(request):
 	# Get the cart
 	cart = Cart(request)
@@ -43,6 +47,8 @@ def checkout(request):
 		shipping_form = ShippingForm(request.POST or None)
 		return render(request, "payment/checkout.html", {"cart_products":cart_products, "quantities":quantities, "totals":totals, "shipping_form":shipping_form})
 
+
+@login_required(login_url='/login')
 def process_order(request):
 	if request.POST:
 		# Get the cart
@@ -108,8 +114,6 @@ def process_order(request):
 			messages.success(request, "Order Placed!")
 			return redirect('home')
 
-			
-
 		else:
 			# not logged in
 			# Create Order
@@ -144,17 +148,14 @@ def process_order(request):
 					# Delete the key
 					del request.session[key]
 
-
-
 			messages.success(request, "Order Placed!")
 			return redirect('home')
-
-
 	else:
 		messages.success(request, "Access Denied")
 		return redirect('home')
 
 
+@login_required(login_url='/login')
 def billing_info(request):
 	if request.POST:
 
@@ -166,7 +167,6 @@ def billing_info(request):
 		# Create a session with billing info 
 		my_shipping = request.POST 
 		request.session['my_session'] = my_shipping
-
 
 		# Get the host
 		"""  """
@@ -183,10 +183,8 @@ def billing_info(request):
 			'return_url': 'https://{}{}'.format(host, reverse("payment_success")),
 			'cancel_return': 'https://{}{}'.format(host, reverse("payment_failed")),
 		}
-
 		# Create acutal paypal button
 		paypal_form = PayPalPaymentsForm(initial=paypal_dict)
-
 		# chect if user is loggedin
 		if request.user.is_authenticated:
 			billing_form = PaymentForm()
@@ -194,8 +192,6 @@ def billing_info(request):
 		else:
 			billing_form = PaymentForm()
 			return render(request, "payment/billing_info.html", {"paypal_form":paypal_form,"cart_products":cart_products, "quantities":quantities, "totals":totals, 'shipping_info': request.POST, 'billing_form':billing_form})
-
-
 		shipping_form = request.POST
 		return render(request, "payment/billing_info.html", {"cart_products":cart_products, "quantities":quantities, "totals":totals, 'shipping_info': shipping_info})
 	else:
@@ -207,6 +203,7 @@ def billing_info(request):
 
 
 
+@login_required(login_url='/login')
 #Dashboard 
 # Shipped
 def not_shipped_dash(request):
@@ -224,12 +221,13 @@ def not_shipped_dash(request):
 			# redirect
 			messages.success(request, "Shipping Status Updated")
 			return redirect('home')
-
 		return render(request, "payment/not_shipped_dash.html", {"orders":orders})
 	else:
 		messages.success(request, "Access Denied")
 		return redirect('home')
 
+
+@login_required(login_url='/login')
 def shipped_dash(request):
 	if request.user.is_authenticated and request.user.is_superuser:
 		orders = Order.objects.filter(shipped=True)
@@ -245,26 +243,21 @@ def shipped_dash(request):
 			# redirect
 			messages.success(request, "Shipping Status Updated")
 			return redirect('home')
-
-
 		return render(request, "payment/shipped_dash.html", {"orders":orders})
 	else:
 		messages.success(request, "Access Denied")
 		return redirect('home')
-	
+
+
 # individual order page
-
+@login_required(login_url='/login')
 def orders(request, pk):
-
 	if request.user.is_authenticated and request.user.is_superuser:
 		# get the orser
 		order = Order.objects.get(id=pk)
 		# get order items 
 		items = OrderItem.objects.filter(order=pk)
-		return render(request, "payment/orders.html", {"order":order, 'items':items})
-	
-	
-	
+		return render(request, "payment/orders.html", {"order":order, 'items':items})	
 	else:
 		messages.success(request, "Access Denied")
 		return redirect('home')
