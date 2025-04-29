@@ -96,14 +96,7 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': BASE_DIR / 'db.sqlite3',
 
-        # Production
-        # Aivien
-        #'ENGINE': 'django.db.backends.postgresql',
-        #'NAME': 'defaultdb',
-        #'USER': 'avnadmin',
-        #'PASSWORD': os.environ.get('what'),
-        #'HOST': 'customkicks-matidza46-4129.e.aivencloud.com',
-        #'PORT': '12695',
+
     }
 }
   
